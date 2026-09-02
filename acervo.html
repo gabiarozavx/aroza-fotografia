@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acervo - Aroza Fotografia</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         CABEÇALHO
+         ========================= -->
+
+    <header>
+
+        <a href="index.html" class="logo">
+            Aroza Fotografia
+        </a>
+
+        <div class="cabecalho-menu">
+
+            <span class="pagina-atual">
+                Acervo
+            </span>
+
+            <nav class="menu-links" aria-label="Navegação principal">
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Início
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="sobre.html">
+                            Sobre
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="acervo.html" class="ativo" aria-current="page">
+                            Acervo
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contato.html">
+                            Contato
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+            >
+                <span class="ponto"></span>
+                <span class="ponto"></span>
+                <span class="ponto"></span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+         ========================= -->
+
+    <main class="pagina-acervo">
+
+
+        <!-- =========================
+             INTRODUÇÃO
+             ========================= -->
+
+        <section class="acervo-introducao">
+
+            <span class="acervo-categoria">
+                ACERVO
+            </span>
+
+            <h1>
+                Meu trabalho
+            </h1>
+
+            <p>
+                Uma seleção de histórias, pessoas e lugares
+                registrados através do meu olhar.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             FILTROS
+             ========================= -->
+
+        <nav class="acervo-filtros" aria-label="Filtrar trabalhos">
+
+            <button
+                class="filtro ativo"
+                data-filtro="todos"
+                type="button"
+            >
+                Todos
+            </button>
+
+            <button
+                class="filtro"
+                data-filtro="autoral"
+                type="button"
+            >
+                Autoral
+            </button>
+
+            <button
+                class="filtro"
+                data-filtro="comissionado"
+                type="button"
+            >
+                Comissionado
+            </button>
+
+            <button
+                class="filtro"
+                data-filtro="eventos"
+                type="button"
+            >
+                Eventos
+            </button>
+
+            <button
+                class="filtro"
+                data-filtro="analogicos"
+                type="button"
+            >
+                Analógicos
+            </button>
+
+        </nav>
+
+
+        <!-- =========================
+             LISTA DE ENSAIOS
+             ========================= -->
+
+        <section class="acervo-lista">
+
+
+            <!-- =========================
+                 ENSAIO 01
+                 ========================= -->
+
+            <a
+                href="card1.html"
+                class="acervo-item"
+                data-categoria="autoral"
+            >
+
+                <div class="acervo-texto">
+
+                    <span class="acervo-numero">
+                        01
+                    </span>
+
+                    <h2 class="acervo-titulo">
+                        Gabriel Molina
+                    </h2>
+
+                    <p class="acervo-subtitulo">
+                        Um ensaio de retrato pensado para explorar
+                        presença, expressão e personalidade através
+                        de uma abordagem minimalista.
+                    </p>
+
+                </div>
+
+                <div class="acervo-imagem">
+
+                    <img
+                        src="imagens/inicio/retrato-gabriel-molina.jpeg"
+                        alt="Ensaio de retrato de Gabriel Molina"
+                    >
+
+                </div>
+
+            </a>
+
+
+            <!-- =========================
+                 ENSAIO 02
+                 ========================= -->
+
+            <a
+                href="card2.html"
+                class="acervo-item"
+                data-categoria="autoral"
+            >
+
+                <div class="acervo-texto">
+
+                    <span class="acervo-numero">
+                        02
+                    </span>
+
+                    <h2 class="acervo-titulo">
+                        IMS — Av. Paulista
+                    </h2>
+
+                    <p class="acervo-subtitulo">
+                        Um registro do espaço, da arquitetura e das
+                        experiências que atravessam o Instituto
+                        Moreira Salles na Avenida Paulista.
+                    </p>
+
+                </div>
+
+                <div class="acervo-imagem">
+
+                    <img
+                        src="imagens/inicio/ims-av.paulista.jpeg"
+                        alt="Ensaio no IMS Avenida Paulista"
+                    >
+
+                </div>
+
+            </a>
+
+
+            <!-- =========================
+                 ENSAIO 03
+                 ========================= -->
+
+            <a
+                href="card3.html"
+                class="acervo-item"
+                data-categoria="autoral"
+            >
+
+                <div class="acervo-texto">
+
+                    <span class="acervo-numero">
+                        03
+                    </span>
+
+                    <h2 class="acervo-titulo">
+                        Showcrazy — Centro Histórico
+                    </h2>
+
+                    <p class="acervo-subtitulo">
+                        Um registro de música, presença e movimento
+                        realizado no Centro Histórico, acompanhando
+                        a atmosfera do show e seus momentos.
+                    </p>
+
+                </div>
+
+                <div class="acervo-imagem">
+
+                    <img
+                        src="imagens/inicio/showcrazy-centrohistorico.jpeg"
+                        alt="Ensaio no Centro Histórico"
+                    >
+
+                </div>
+
+            </a>
+
+
+            <!-- =========================
+                 ENSAIO 04
+                 ========================= -->
+
+            <a
+                href="novo-analogo.html"
+                class="acervo-item"
+                data-categoria="analogicos"
+            >
+
+                <div class="acervo-texto">
+
+                    <span class="acervo-numero">
+                        04
+                    </span>
+
+                    <h2 class="acervo-titulo">
+                        Novo Análogo
+                    </h2>
+
+                    <p class="acervo-subtitulo">
+                        Meu segundo filme analógico, feito com
+                        Fujifilm ISO400 e a câmera Photura 135 —
+                        um processo de peso emocional e gratificante.
+                    </p>
+
+                </div>
+
+                <div class="acervo-imagem">
+
+                    <img
+                        src="imagens/novo-analogo/foto1.jpeg"
+                        alt="Fotografia analógica do ensaio Novo Análogo"
+                    >
+
+                </div>
+
+            </a>
+
+
+            <!-- =========================
+                 ENSAIO 05
+                 ========================= -->
+
+            <a
+                href="juliana-e-bianca.html"
+                class="acervo-item"
+                data-categoria="autoral"
+            >
+
+                <div class="acervo-texto">
+
+                    <span class="acervo-numero">
+                        05
+                    </span>
+
+                    <h2 class="acervo-titulo">
+                        J & B
+                    </h2>
+
+                    <p class="acervo-subtitulo">
+                        Um encontro com minha amiga Juliana e sua
+                        namorada Bianca na Praça Ramos de Azevedo,
+                        no Anhangabaú, mais um dos nossos rolês
+                        despretensiosos e nostálgicos.
+                    </p>
+
+                </div>
+
+                <div class="acervo-imagem">
+
+                    <img
+                        src="imagens/praca-ramos-sp/foto1.jpeg"
+                        alt="Fotografia noturna na Praça Ramos de Azevedo, São Paulo"
+                    >
+
+                </div>
+
+            </a>
+
+
+        </section>
+
+
+        <!-- =========================
+             MENSAGEM FINAL
+             ========================= -->
+
+        <section class="acervo-final">
+
+            <p>
+                Mais histórias em breve.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         RODAPÉ
+         ========================= -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 Aroza Fotografia |
+            Todos os direitos reservados
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

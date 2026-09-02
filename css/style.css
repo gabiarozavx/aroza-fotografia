@@ -1,0 +1,2857 @@
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    background: #fff;
+
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 30px;
+
+    z-index: 1000;
+}
+
+header .logo {
+    font-weight: bold;
+
+    font-size: 1.2rem;
+
+}
+
+
+/* Container do menu (nome da página + tira de links + ícone) */
+
+.cabecalho-menu {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.logo {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo:hover {
+    text-decoration: none;
+}
+
+.pagina-atual {
+    font-size: 0.75rem;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #777;
+
+    white-space: nowrap;
+}
+
+
+/* Tira de links — escondida até o menu abrir */
+
+.menu-links {
+    display: flex;
+
+    align-items: center;
+
+    max-width: 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    transition: max-width 0.5s ease;
+}
+
+.menu-links ul {
+    list-style: none;
+
+    display: flex;
+
+    gap: 24px;
+
+    padding-right: 4px;
+}
+
+.menu-links ul li {
+    opacity: 0;
+
+    transform: translateX(15px);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.menu-links ul li a {
+    text-decoration: none;
+
+    color: #333;
+
+    font-size: 0.9rem;
+
+    transition: color 0.3s ease;
+}
+
+.menu-links ul li a:hover {
+    color: #000;
+}
+
+.menu-links ul li a.ativo {
+    font-weight: bold;
+
+    border-bottom: 2px solid #000;
+}
+
+
+/* Ordem de revelação — o item mais próximo do ícone aparece primeiro */
+
+.menu-links ul li:nth-child(4) { transition-delay: 0.05s; }
+.menu-links ul li:nth-child(3) { transition-delay: 0.10s; }
+.menu-links ul li:nth-child(2) { transition-delay: 0.15s; }
+.menu-links ul li:nth-child(1) { transition-delay: 0.20s; }
+
+
+/* Estado aberto */
+
+.cabecalho-menu.aberto .menu-links {
+    max-width: 500px;
+}
+
+.cabecalho-menu.aberto .menu-links ul li {
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+
+/* Ícone de três pontinhos */
+
+.menu-toggle {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 4px;
+
+    width: 32px;
+
+    height: 32px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.menu-toggle .ponto {
+    width: 18px;
+
+    height: 2px;
+
+    border-radius: 2px;
+
+    background: #222;
+
+    transition:
+        width 0.35s ease,
+        border-radius 0.35s ease;
+}
+
+.cabecalho-menu.aberto .menu-toggle .ponto {
+    width: 4px;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   HERO — HOME
+   ========================================================= */
+
+.hero {
+    height: 100vh;
+
+    background-image:
+        url("../imagens/inicio/perfil.jpeg");
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    background-position: center center;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    color: #fff;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Vinheta */
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0.10) 10%,
+            rgba(0, 0, 0, 0.40) 100%
+        );
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+
+/* Transição para a próxima seção */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 22%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 1)
+        );
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* Conteúdo do hero */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 700px;
+
+    padding:
+        0 20px;
+
+    transition:
+        opacity 0.1s linear,
+        transform 0.1s linear;
+}
+
+.hero-content h1 {
+
+    font-size:
+        3rem;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        2px;
+
+    text-shadow:
+        0 6px 13px rgba(0, 0, 0, 0.55);
+}
+
+.hero-content p {
+
+    margin-top:
+        15px;
+
+    font-size:
+        1.1rem;
+
+    letter-spacing:
+        1px;
+
+    text-shadow:
+        0 6px 13px rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   HOME — ÚLTIMOS ENSAIOS
+   ========================================================= */
+
+.ultimos-ensaios {
+
+    padding:
+        100px 0 80px;
+}
+
+.secao-titulo {
+
+    max-width:
+        1400px;
+
+    margin:
+        0 auto 50px;
+
+    padding:
+        0 40px;
+}
+
+.secao-titulo span {
+
+    display:
+        block;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #777;
+}
+
+.secao-titulo h2 {
+
+    margin-top:
+        12px;
+
+    font-size:
+        2.5rem;
+
+    font-weight:
+        400;
+}
+
+
+/* =========================================================
+   GRID DOS ÚLTIMOS ENSAIOS
+   ========================================================= */
+
+.ensaios {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap:
+        20px;
+
+    max-width:
+        1400px;
+
+    height:
+        620px;
+
+    margin:
+        0 auto;
+
+    padding:
+        0 40px;
+
+    transition:
+        grid-template-columns 0.6s ease,
+        grid-template-rows 0.6s ease;
+}
+
+.ensaio-card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    display:
+        block;
+
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    text-decoration:
+        none;
+}
+
+.ensaio-principal {
+
+    grid-row:
+        1 / 3;
+}
+
+
+/* Expansão */
+
+.ensaios:has(
+    .ensaio-card:nth-child(1):hover
+) {
+
+    grid-template-columns:
+        2.2fr 0.8fr;
+}
+
+.ensaios:has(
+    .ensaio-card:nth-child(2):hover
+) {
+
+    grid-template-columns:
+        1.85fr 1.15fr;
+
+    grid-template-rows:
+        1.15fr 0.85fr;
+}
+
+.ensaios:has(
+    .ensaio-card:nth-child(3):hover
+) {
+
+    grid-template-columns:
+        1.85fr 1.15fr;
+
+    grid-template-rows:
+        0.85fr 1.15fr;
+}
+
+
+/* Imagem */
+
+.ensaio-card img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform 0.8s ease;
+}
+
+.ensaio-card:hover img {
+
+    transform:
+        scale(1.04);
+}
+
+
+/* Overlay */
+
+.ensaio-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        flex-end;
+
+    padding:
+        30px;
+
+    color:
+        #fff;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 0, 0, 0)
+        );
+
+    opacity:
+        0;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+.ensaio-card:hover
+.ensaio-overlay {
+
+    opacity:
+        1;
+}
+
+.ensaio-overlay span {
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    margin-bottom:
+        6px;
+}
+
+.ensaio-overlay h3 {
+
+    font-size:
+        1.6rem;
+
+    font-weight:
+        400;
+}
+
+
+/* =========================================================
+   ACERVO
+   ========================================================= */
+
+.pagina-acervo {
+
+    max-width:
+        1400px;
+
+    margin:
+        0 auto;
+
+    padding:
+        150px
+        40px
+        100px;
+}
+
+
+/* Introdução */
+
+.acervo-introducao {
+
+    max-width:
+        750px;
+
+    margin:
+        0 auto
+        60px;
+
+    text-align:
+        center;
+}
+
+.acervo-categoria {
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #777;
+}
+
+.acervo-introducao h1 {
+
+    margin-top:
+        15px;
+
+    font-size:
+        3rem;
+
+    font-weight:
+        400;
+
+    color:
+        #222;
+}
+
+.acervo-introducao p {
+
+    margin-top:
+        20px;
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.7;
+
+    color:
+        #666;
+}
+
+
+/* Filtros */
+
+.acervo-filtros {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        35px;
+
+    margin:
+        0 auto 65px;
+
+    padding:
+        0 20px;
+}
+
+.filtro {
+
+    position:
+        relative;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    padding:
+        0 0 7px;
+
+    font-family:
+        inherit;
+
+    font-size:
+        0.72rem;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #888;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.3s ease;
+}
+
+.filtro::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        0;
+
+    height:
+        1px;
+
+    background:
+        #222;
+
+    transition:
+        width 0.35s ease;
+}
+
+.filtro:hover {
+
+    color:
+        #222;
+}
+
+.filtro.ativo {
+
+    color:
+        #222;
+}
+
+.filtro.ativo::after {
+
+    width:
+        100%;
+}
+
+
+/* Lista de ensaios */
+
+.acervo-lista {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    max-width:
+        1200px;
+
+    margin:
+        0 auto;
+}
+
+
+/* Item (um ensaio por linha) */
+
+.acervo-item {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        60px;
+
+    padding:
+        40px 0;
+
+    border-bottom:
+        1px solid #eee;
+
+    text-decoration:
+        none;
+
+    opacity:
+        1;
+
+    transform:
+        scale(1);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+.acervo-item:first-child {
+
+    padding-top:
+        0;
+}
+
+
+/* Oculto (filtro) */
+
+.acervo-item.oculto {
+
+    display:
+        none;
+}
+
+
+/* Texto — título e subtítulo */
+
+.acervo-texto {
+
+    flex:
+        1;
+
+    max-width:
+        420px;
+}
+
+.acervo-numero {
+
+    display:
+        block;
+
+    margin-bottom:
+        10px;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        2px;
+
+    color:
+        #bbb;
+}
+
+.acervo-titulo {
+
+    font-size:
+        2.1rem;
+
+    font-weight:
+        400;
+
+    color:
+        #222;
+}
+
+.acervo-subtitulo {
+
+    margin-top:
+        16px;
+
+    max-width:
+        360px;
+
+    font-size:
+        0.92rem;
+
+    line-height:
+        1.75;
+
+    color:
+        #777;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(8px);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+.acervo-item:has(.acervo-titulo:hover)
+.acervo-subtitulo,
+.acervo-item:has(.acervo-imagem:hover)
+.acervo-subtitulo {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* Imagem */
+
+.acervo-imagem {
+
+    flex:
+        1.15;
+
+    max-width:
+        520px;
+
+    aspect-ratio:
+        4 / 5;
+
+    overflow:
+        hidden;
+}
+
+.acervo-imagem img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform 0.8s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+}
+
+.acervo-imagem:hover img {
+
+    transform:
+        scale(1.045);
+}
+
+
+/* Final */
+
+.acervo-final {
+
+    text-align:
+        center;
+
+    margin-top:
+        70px;
+
+    color:
+        #888;
+
+    font-size:
+        0.8rem;
+
+    letter-spacing:
+        1px;
+}
+
+
+/* =========================================================
+   SOBRE — NOVA ESTRUTURA
+   ========================================================= */
+
+.pagina-sobre {
+
+    max-width:
+        1400px;
+
+    margin:
+        0 auto;
+
+    padding:
+        150px
+        40px
+        100px;
+}
+
+
+/* ---------------------------------------------------------
+   Introdução
+   --------------------------------------------------------- */
+
+.sobre-introducao {
+
+    max-width:
+        800px;
+
+    margin:
+        0 auto 70px;
+
+    text-align:
+        center;
+}
+
+.sobre-categoria {
+
+    display:
+        block;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #777;
+
+    opacity:
+        0;
+
+    animation:
+        sobreEntrada 0.9s
+        ease forwards;
+}
+
+
+.sobre-introducao h1 {
+
+    margin-top:
+        15px;
+
+    font-size:
+        3rem;
+
+    font-weight:
+        400;
+
+    color:
+        #222;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(25px);
+
+    animation:
+        sobreEntrada 1s
+        0.15s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        forwards;
+}
+
+
+/* ---------------------------------------------------------
+   Foto principal em faixa
+   --------------------------------------------------------- */
+
+.sobre-foto-principal {
+
+    width:
+        100%;
+
+    overflow:
+        hidden;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(30px);
+
+    animation:
+        sobreEntrada 1.1s
+        0.35s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        forwards;
+}
+
+.sobre-foto-principal img {
+
+    width:
+        100%;
+
+    height:
+        320px;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center 40%;
+
+    transition:
+        transform 1.2s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+}
+
+.sobre-foto-principal:hover img {
+
+    transform:
+        scale(1.025);
+}
+
+
+/* ---------------------------------------------------------
+   Apresentação
+   --------------------------------------------------------- */
+
+.sobre-apresentacao {
+
+    max-width:
+        1100px;
+
+    margin:
+        100px auto 0;
+
+    padding:
+        0 40px;
+}
+
+.sobre-apresentacao-conteudo {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        70px;
+}
+
+.sobre-apresentacao-texto {
+
+    flex:
+        1;
+
+    max-width:
+        480px;
+}
+
+.sobre-apresentacao-imagem {
+
+    flex:
+        1;
+
+    max-width:
+        420px;
+}
+
+.sobre-apresentacao-imagem img {
+
+    width:
+        100%;
+
+    height:
+        auto;
+
+    display:
+        block;
+}
+
+.sobre-pequeno-titulo {
+
+    display:
+        block;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #777;
+
+    margin-bottom:
+        20px;
+}
+
+.sobre-apresentacao h2 {
+
+    font-size:
+        2rem;
+
+    font-weight:
+        400;
+
+    color:
+        #222;
+
+    margin-bottom:
+        25px;
+}
+
+.sobre-apresentacao p {
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.8;
+
+    color:
+        #555;
+
+    margin-bottom:
+        20px;
+}
+
+
+/* ---------------------------------------------------------
+   Meu trabalho
+   --------------------------------------------------------- */
+
+.sobre-trabalho {
+
+    max-width:
+        1100px;
+
+    margin:
+        90px auto 0;
+
+    padding:
+        70px 40px 0;
+
+    border-top:
+        1px solid #e5e5e5;
+}
+
+.sobre-trabalho-conteudo {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        70px;
+}
+
+.sobre-trabalho-imagem {
+
+    flex:
+        1;
+
+    max-width:
+        420px;
+}
+
+.sobre-trabalho-imagem img {
+
+    width:
+        100%;
+
+    height:
+        auto;
+
+    display:
+        block;
+}
+
+.sobre-trabalho-texto {
+
+    flex:
+        1;
+
+    max-width:
+        480px;
+}
+
+.sobre-trabalho p {
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.8;
+
+    color:
+        #555;
+
+    margin-bottom:
+        20px;
+}
+
+
+/* ---------------------------------------------------------
+   Convite final
+   --------------------------------------------------------- */
+
+.sobre-cta {
+
+    max-width:
+        700px;
+
+    margin:
+        100px auto 0;
+
+    padding:
+        70px 40px 0;
+
+    border-top:
+        1px solid #e5e5e5;
+
+    text-align:
+        center;
+}
+
+.sobre-cta p {
+
+    font-size:
+        1.1rem;
+
+    color:
+        #444;
+
+    margin-bottom:
+        28px;
+}
+
+.sobre-cta-links {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        35px;
+}
+
+.sobre-cta-links a {
+
+    font-size:
+        0.85rem;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #222;
+
+    text-decoration:
+        none;
+
+    padding-bottom:
+        6px;
+
+    border-bottom:
+        1px solid #222;
+
+    transition:
+        opacity 0.3s ease;
+}
+
+.sobre-cta-links a:hover {
+
+    opacity:
+        0.6;
+}
+
+
+/* ---------------------------------------------------------
+   Animação
+   --------------------------------------------------------- */
+
+@keyframes sobreEntrada {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   PÁGINA DO ENSAIO
+   ========================================================= */
+
+.pagina-ensaio {
+
+    max-width:
+        1400px;
+
+    margin:
+        0 auto;
+
+    padding:
+        140px
+        40px
+        80px;
+}
+
+
+/* Introdução */
+
+.ensaio-introducao {
+
+    max-width:
+        750px;
+
+    margin:
+        0 auto 80px;
+
+    text-align:
+        center;
+}
+
+.ensaio-categoria {
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #777;
+}
+
+.ensaio-introducao h1 {
+
+    margin-top:
+        15px;
+
+    font-size:
+        3rem;
+
+    font-weight:
+        400;
+
+    color:
+        #222;
+}
+
+.ensaio-introducao p {
+
+    margin-top:
+        20px;
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.7;
+
+    color:
+        #666;
+}
+
+
+/* Galeria */
+
+.galeria-ensaio {
+
+    columns:
+        3 260px;
+
+    column-gap:
+        22px;
+}
+
+.foto-ensaio {
+
+    display:
+        block;
+
+    break-inside:
+        avoid;
+
+    margin-bottom:
+        22px;
+
+    overflow:
+        hidden;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(20px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.foto-ensaio img {
+
+    width:
+        100%;
+
+    height:
+        auto;
+
+    display:
+        block;
+
+    transition:
+        transform 0.8s ease;
+}
+
+.foto-ensaio:hover img {
+
+    transform:
+        scale(1.025);
+}
+
+.foto-ensaio.visivel {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* Voltar */
+
+.voltar-ensaios {
+
+    text-align:
+        center;
+
+    margin-top:
+        80px;
+}
+
+.voltar-ensaios a {
+
+    display:
+        inline-block;
+
+    text-decoration:
+        none;
+
+    color:
+        #333;
+
+    font-size:
+        0.85rem;
+
+    letter-spacing:
+        1px;
+
+    border-bottom:
+        1px solid #333;
+
+    padding-bottom:
+        5px;
+
+    transition:
+        opacity 0.3s ease;
+}
+
+.voltar-ensaios a:hover {
+
+    opacity:
+        0.5;
+}
+
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+.lightbox {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        rgba(0, 0, 0, 0.92);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        40px;
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+    z-index:
+        2000;
+}
+
+.lightbox.aberto {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+}
+
+.lightbox-imagem {
+
+    max-width:
+        90vw;
+
+    max-height:
+        85vh;
+
+    width:
+        auto;
+
+    height:
+        auto;
+
+    object-fit:
+        contain;
+
+    opacity:
+        1;
+
+    transform:
+        scale(1);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.lightbox-imagem.trocando {
+
+    opacity:
+        0;
+
+    transform:
+        scale(0.98);
+}
+
+
+/* Botões */
+
+.lightbox button {
+
+    position:
+        absolute;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        #fff;
+
+    cursor:
+        pointer;
+
+    padding:
+        12px;
+
+    opacity:
+        0.7;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.lightbox button:hover {
+
+    opacity:
+        1;
+
+    transform:
+        scale(1.08);
+}
+
+.lightbox-fechar {
+
+    top:
+        25px;
+
+    right:
+        30px;
+
+    font-size:
+        2.5rem;
+}
+
+.lightbox-anterior {
+
+    left:
+        30px;
+
+    font-size:
+        2rem;
+}
+
+.lightbox-proxima {
+
+    right:
+        30px;
+
+    font-size:
+        2rem;
+}
+
+
+/* Contador */
+
+.lightbox-contador {
+
+    position:
+        absolute;
+
+    bottom:
+        25px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        #fff;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        2px;
+
+    opacity:
+        0.7;
+}
+
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+footer {
+
+    text-align:
+        center;
+
+    padding:
+        20px;
+
+    border-top:
+        1px solid #ddd;
+
+    margin-top:
+        40px;
+
+    color:
+        #666;
+
+    font-size:
+        0.8rem;
+}
+
+
+/* =========================================================
+   CONTATO
+   ========================================================= */
+
+.pagina-contato {
+
+    max-width:
+        1400px;
+
+    margin:
+        0 auto;
+
+    padding:
+        150px
+        40px
+        100px;
+}
+
+
+/* Introdução */
+
+.contato-introducao {
+
+    max-width:
+        750px;
+
+    margin:
+        0 auto 70px;
+
+    text-align:
+        center;
+}
+
+.contato-categoria {
+
+    display:
+        block;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #777;
+}
+
+.contato-introducao h1 {
+
+    margin-top:
+        15px;
+
+    font-size:
+        3rem;
+
+    font-weight:
+        400;
+
+    color:
+        #222;
+}
+
+.contato-introducao p {
+
+    margin-top:
+        20px;
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.7;
+
+    color:
+        #666;
+}
+
+
+/* Conteúdo — formulário + contato direto */
+
+.contato-conteudo {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.3fr 1fr;
+
+    gap:
+        70px;
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto;
+}
+
+
+/* Formulário */
+
+.contato-formulario {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        22px;
+}
+
+.campo-formulario {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        8px;
+}
+
+.campo-formulario label {
+
+    font-size:
+        0.75rem;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #777;
+}
+
+.campo-formulario input,
+.campo-formulario textarea {
+
+    font-family:
+        inherit;
+
+    font-size:
+        0.95rem;
+
+    color:
+        #333;
+
+    padding:
+        12px 0;
+
+    border:
+        none;
+
+    border-bottom:
+        1px solid #ccc;
+
+    background:
+        transparent;
+
+    transition:
+        border-color 0.3s ease;
+}
+
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
+
+    outline:
+        none;
+
+    border-bottom-color:
+        #222;
+}
+
+.campo-formulario textarea {
+
+    resize:
+        vertical;
+
+    min-height:
+        110px;
+}
+
+.contato-enviar {
+
+    align-self:
+        flex-start;
+
+    margin-top:
+        10px;
+
+    padding:
+        14px 38px;
+
+    border:
+        1px solid #222;
+
+    background:
+        transparent;
+
+    color:
+        #222;
+
+    font-family:
+        inherit;
+
+    font-size:
+        0.75rem;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.contato-enviar:hover {
+
+    background:
+        #222;
+
+    color:
+        #fff;
+}
+
+.contato-status {
+
+    margin-top:
+        4px;
+
+    font-size:
+        0.8rem;
+
+    color:
+        #777;
+}
+
+
+/* Contato direto */
+
+.contato-direto {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        30px;
+
+    padding-left:
+        70px;
+
+    border-left:
+        1px solid #ddd;
+}
+
+.contato-direto-item {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        6px;
+}
+
+.contato-direto-item span {
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #777;
+}
+
+.contato-direto-item a {
+
+    font-size:
+        1rem;
+
+    color:
+        #222;
+
+    text-decoration:
+        none;
+
+    border-bottom:
+        1px solid transparent;
+
+    transition:
+        border-color 0.3s ease;
+}
+
+.contato-direto-item a:hover {
+
+    border-bottom-color:
+        #222;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    header {
+
+        padding:
+            15px 20px;
+    }
+
+    .cabecalho-menu {
+
+        gap:
+            14px;
+    }
+
+    .menu-links ul {
+
+        gap:
+            18px;
+    }
+
+    .menu-links ul li a {
+
+        font-size:
+            0.85rem;
+    }
+
+
+    /* Hero */
+
+    .hero-content h1 {
+
+        font-size:
+            2.2rem;
+    }
+
+
+    /* Home */
+
+    .ensaios {
+
+        grid-template-columns:
+            1fr;
+
+        grid-template-rows:
+            400px
+            300px
+            300px;
+
+        height:
+            auto;
+
+        padding:
+            0 20px;
+    }
+
+    .ensaio-principal {
+
+        grid-row:
+            auto;
+    }
+
+
+    /* Acervo */
+
+    .pagina-acervo {
+
+        padding:
+            120px
+            20px
+            70px;
+    }
+
+    .acervo-introducao h1 {
+
+        font-size:
+            2.3rem;
+    }
+
+    .acervo-item {
+
+        gap:
+            35px;
+
+        padding:
+            40px 0;
+    }
+
+    .acervo-titulo {
+
+        font-size:
+            1.7rem;
+    }
+
+
+    /* Sobre */
+
+    .pagina-sobre {
+
+        padding:
+            130px
+            25px
+            70px;
+    }
+
+    .sobre-introducao h1 {
+
+        font-size:
+            2.4rem;
+    }
+
+    .sobre-foto-principal img {
+
+        height:
+            260px;
+    }
+
+    .sobre-apresentacao-conteudo,
+    .sobre-trabalho-conteudo {
+
+        flex-direction:
+            column;
+
+        gap:
+            35px;
+    }
+
+    .sobre-apresentacao-texto,
+    .sobre-apresentacao-imagem,
+    .sobre-trabalho-texto,
+    .sobre-trabalho-imagem {
+
+        max-width:
+            none;
+    }
+
+    .sobre-trabalho-conteudo {
+
+        flex-direction:
+            column-reverse;
+    }
+
+
+    /* Ensaio */
+
+    .pagina-ensaio {
+
+        padding:
+            120px
+            25px
+            60px;
+    }
+
+    .ensaio-introducao h1 {
+
+        font-size:
+            2.3rem;
+    }
+
+    .galeria-ensaio {
+
+        columns:
+            2 220px;
+
+        column-gap:
+            18px;
+    }
+
+
+    /* Contato */
+
+    .pagina-contato {
+
+        padding:
+            120px
+            20px
+            70px;
+    }
+
+    .contato-introducao h1 {
+
+        font-size:
+            2.3rem;
+    }
+
+    .contato-conteudo {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            50px;
+    }
+
+    .contato-direto {
+
+        padding-left:
+            0;
+
+        padding-top:
+            40px;
+
+        border-left:
+            none;
+
+        border-top:
+            1px solid #ddd;
+    }
+
+
+    /* Lightbox */
+
+    .lightbox {
+
+        padding:
+            60px;
+    }
+
+    .lightbox-imagem {
+
+        max-width:
+            85vw;
+
+        max-height:
+            80vh;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    header {
+
+        padding:
+            12px 15px;
+    }
+
+    .cabecalho-menu {
+
+        gap:
+            10px;
+    }
+
+    .pagina-atual {
+
+        font-size:
+            0.68rem;
+    }
+
+    .menu-links ul {
+
+        gap:
+            14px;
+    }
+
+
+    /* =====================================================
+       HERO MOBILE
+       ===================================================== */
+
+    .hero {
+
+        min-height:
+            100svh;
+    }
+
+    .hero::before {
+
+        height:
+            28%;
+    }
+
+    .hero-content {
+
+        max-width:
+            330px;
+    }
+
+    .hero-content h1 {
+
+        font-size:
+            1.65rem;
+
+        letter-spacing:
+            1px;
+    }
+
+    .hero-content p {
+
+        font-size:
+            0.82rem;
+
+        margin-top:
+            10px;
+
+        letter-spacing:
+            0.8px;
+    }
+
+
+    /* =====================================================
+       ÚLTIMOS ENSAIOS MOBILE
+       ===================================================== */
+
+    .ultimos-ensaios {
+
+        padding:
+            80px 0;
+    }
+
+    .secao-titulo {
+
+        padding:
+            0 20px;
+
+        margin-bottom:
+            30px;
+    }
+
+    .secao-titulo h2 {
+
+        font-size:
+            2rem;
+    }
+
+    .ensaios {
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        height:
+            auto;
+
+        gap:
+            15px;
+
+        padding:
+            0 20px;
+    }
+
+    .ensaio-card,
+    .ensaio-principal {
+
+        height:
+            300px;
+
+        min-height:
+            300px;
+    }
+
+
+    /*
+       Destaque pelo scroll
+    */
+
+    .ensaio-card .ensaio-overlay {
+
+        opacity:
+            0;
+
+        transition:
+            opacity 0.5s ease;
+    }
+
+    .ensaio-card.em-destaque
+    .ensaio-overlay {
+
+        opacity:
+            1;
+    }
+
+    .ensaio-card.em-destaque img {
+
+        transform:
+            scale(1.04);
+    }
+
+
+    /* =====================================================
+       ACERVO MOBILE
+       ===================================================== */
+
+    .acervo-introducao {
+
+        margin-bottom:
+            45px;
+    }
+
+    .acervo-introducao h1 {
+
+        font-size:
+            2rem;
+    }
+
+    .acervo-introducao p {
+
+        font-size:
+            0.95rem;
+    }
+
+    .acervo-filtros {
+
+        gap:
+            18px;
+
+        margin-bottom:
+            45px;
+    }
+
+    .acervo-item {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap:
+            22px;
+
+        padding:
+            35px 0;
+    }
+
+    .acervo-texto {
+
+        max-width:
+            none;
+    }
+
+    .acervo-titulo {
+
+        font-size:
+            1.6rem;
+    }
+
+    .acervo-imagem {
+
+        max-width:
+            none;
+
+        width:
+            100%;
+    }
+
+
+    /* Subtítulo sempre visível — sem hover confiável no toque */
+
+    .acervo-subtitulo {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+    }
+
+
+    /* =====================================================
+       SOBRE MOBILE
+       ===================================================== */
+
+    .pagina-sobre {
+
+        padding:
+            125px
+            20px
+            70px;
+    }
+
+    .sobre-introducao {
+
+        margin-bottom:
+            45px;
+    }
+
+    .sobre-introducao h1 {
+
+        font-size:
+            2rem;
+
+        line-height:
+            1.25;
+    }
+
+    .sobre-foto-principal {
+
+        width:
+            100%;
+    }
+
+    .sobre-foto-principal img {
+
+        height:
+            180px;
+
+        object-position:
+            center 80%;
+    }
+
+    .sobre-apresentacao {
+
+        margin-top:
+            65px;
+
+        padding:
+            0;
+    }
+
+    .sobre-apresentacao h2 {
+
+        font-size:
+            1.7rem;
+    }
+
+    .sobre-apresentacao p,
+    .sobre-trabalho p {
+
+        font-size:
+            0.95rem;
+
+        line-height:
+            1.75;
+    }
+
+    .sobre-trabalho {
+
+        margin-top:
+            65px;
+
+        padding:
+            50px 0 0;
+    }
+
+    .sobre-cta {
+
+        margin-top:
+            65px;
+
+        padding:
+            50px 20px 0;
+    }
+
+    .sobre-cta p {
+
+        font-size:
+            1rem;
+    }
+
+    .sobre-cta-links {
+
+        flex-direction:
+            column;
+
+        gap:
+            18px;
+    }
+
+
+    /* =====================================================
+       ENSAIO MOBILE
+       ===================================================== */
+
+    .pagina-ensaio {
+
+        padding:
+            120px
+            20px
+            60px;
+    }
+
+    .ensaio-introducao {
+
+        margin-bottom:
+            60px;
+    }
+
+    .ensaio-introducao h1 {
+
+        font-size:
+            2.2rem;
+    }
+
+    .galeria-ensaio {
+
+        columns:
+            1;
+    }
+
+    .foto-ensaio {
+
+        margin-bottom:
+            18px;
+    }
+
+
+    /* =====================================================
+       CONTATO MOBILE
+       ===================================================== */
+
+    .pagina-contato {
+
+        padding:
+            125px
+            20px
+            70px;
+    }
+
+    .contato-introducao {
+
+        margin-bottom:
+            45px;
+    }
+
+    .contato-introducao h1 {
+
+        font-size:
+            2rem;
+    }
+
+    .contato-introducao p {
+
+        font-size:
+            0.95rem;
+    }
+
+    .contato-conteudo {
+
+        gap:
+            40px;
+    }
+
+    .contato-direto {
+
+        padding-top:
+            35px;
+
+        gap:
+            25px;
+    }
+
+
+    /* =====================================================
+       LIGHTBOX MOBILE
+       ===================================================== */
+
+    .lightbox {
+
+        padding:
+            50px 20px;
+    }
+
+    .lightbox-imagem {
+
+        max-width:
+            90vw;
+
+        max-height:
+            78vh;
+    }
+
+    .lightbox-fechar {
+
+        top:
+            15px;
+
+        right:
+            20px;
+
+        font-size:
+            2.2rem;
+    }
+
+    .lightbox-anterior {
+
+        left:
+            15px;
+
+        font-size:
+            1.6rem;
+    }
+
+    .lightbox-proxima {
+
+        right:
+            15px;
+
+        font-size:
+            1.6rem;
+    }
+
+}

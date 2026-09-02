@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contato — Aroza Fotografia</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
+
+    <header>
+
+        <a href="index.html" class="logo">
+            Aroza Fotografia
+        </a>
+
+        <div class="cabecalho-menu">
+
+            <span class="pagina-atual">
+                Contato
+            </span>
+
+            <nav class="menu-links" aria-label="Navegação principal">
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Início
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="sobre.html">
+                            Sobre
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="acervo.html">
+                            Acervo
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contato.html" class="ativo" aria-current="page">
+                            Contato
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+            >
+                <span class="ponto"></span>
+                <span class="ponto"></span>
+                <span class="ponto"></span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+
+    <main class="pagina-contato">
+
+
+        <!-- =================================================
+             INTRODUÇÃO
+             ================================================= -->
+
+        <section class="contato-introducao">
+
+            <span class="contato-categoria">
+                CONTATO
+            </span>
+
+            <h1>
+                Vamos conversar sobre o seu projeto.
+            </h1>
+
+            <p>
+                Preencha o formulário ou entre em contato
+                diretamente pelos canais abaixo.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             FORMULÁRIO + CONTATO DIRETO
+             ================================================= -->
+
+        <section class="contato-conteudo">
+
+
+            <!-- =============================================
+                 FORMULÁRIO
+                 ============================================= -->
+
+            <form class="contato-formulario" id="formulario-contato">
+
+                <div class="campo-formulario">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Seu nome"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="seu@email.com"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="mensagem">
+                        Mensagem
+                    </label>
+
+                    <textarea
+                        id="mensagem"
+                        name="mensagem"
+                        placeholder="Conte um pouco sobre o seu projeto"
+                        required
+                    ></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="contato-enviar"
+                >
+                    Enviar mensagem
+                </button>
+
+                <p
+                    class="contato-status"
+                    id="contato-status"
+                ></p>
+
+            </form>
+
+
+            <!-- =============================================
+                 CONTATO DIRETO
+                 ============================================= -->
+
+            <div class="contato-direto">
+
+                <div class="contato-direto-item">
+
+                    <span>
+                        Instagram
+                    </span>
+
+                    <a
+                        href="https://instagram.com/arozafotografia"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        @arozafotografia
+                    </a>
+
+                </div>
+
+                <div class="contato-direto-item">
+
+                    <span>
+                        E-mail
+                    </span>
+
+                    <a href="mailto:arozafotografia@outlook.com">
+                        arozafotografia@outlook.com
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         RODAPÉ
+         ===================================================== -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 Aroza Fotografia |
+            Todos os direitos reservados
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <!-- EmailJS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+        emailjs.init("e6KrVBPHSF8MxGMwK");
+    </script>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
