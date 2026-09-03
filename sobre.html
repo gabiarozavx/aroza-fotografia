@@ -104,10 +104,12 @@
 
         <section class="sobre-foto-principal">
 
-            <img
-                src="imagens/sobre/perfil.jpeg"
-                alt="Gabrielli Aroza"
-            >
+            <a href="imagens/sobre/perfil.jpeg" class="foto-sobre" aria-label="Ampliar fotografia">
+                <img
+                    src="imagens/sobre/perfil.jpeg"
+                    alt="Gabrielli Aroza"
+                >
+            </a>
 
         </section>
 
@@ -155,10 +157,13 @@
 
                 <div class="sobre-apresentacao-imagem">
 
-                    <img
-                        src="imagens/sobre/foto1.jpeg"
-                        alt="Gabrielli Aroza fotografando"
-                    >
+                    <a href="imagens/sobre/foto1_resultado.webp" class="foto-sobre" aria-label="Ampliar fotografia">
+                        <img
+                            src="imagens/sobre/foto1_resultado.webp"
+                            alt="Gabrielli Aroza fotografando"
+                            loading="lazy"
+                        >
+                    </a>
 
                 </div>
 
@@ -177,10 +182,13 @@
 
                 <div class="sobre-trabalho-imagem">
 
-                    <img
-                        src="imagens/sobre/foto2.jpeg"
-                        alt="Detalhe do trabalho fotográfico de Gabrielli Aroza"
-                    >
+                    <a href="imagens/sobre/foto2_resultado.webp" class="foto-sobre" aria-label="Ampliar fotografia">
+                        <img
+                            src="imagens/sobre/foto2_resultado.webp"
+                            alt="Detalhe do trabalho fotográfico de Gabrielli Aroza"
+                            loading="lazy"
+                        >
+                    </a>
 
                 </div>
 
@@ -243,12 +251,25 @@
              BASTIDORES — PREPARADO PARA O FUTURO
              ================================================= -->
 
-        <!--
-            Esta seção será preenchida futuramente
-            com fotografias de bastidores dos projetos.
-        -->
+        <section class="sobre-bastidores" aria-label="Bastidores">
+            <span class="sobre-pequeno-titulo">BASTIDORES</span>
+            <h2>Em breve, também por aqui.</h2>
+            <p>Uma página dedicada aos bastidores dos projetos, aos processos e aos momentos que acontecem por trás das imagens.</p>
+        </section>
 
     </main>
+
+
+    <!-- =========================
+         LIGHTBOX — SOBRE
+         ========================= -->
+
+    <div class="lightbox lightbox-sobre" id="lightbox-sobre" aria-hidden="true">
+        <button class="lightbox-fechar" type="button" aria-label="Fechar imagem">&times;</button>
+        <div class="lightbox-conteudo">
+            <img class="lightbox-imagem" src="" alt="">
+        </div>
+    </div>
 
 
     <!-- =====================================================

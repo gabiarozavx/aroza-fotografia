@@ -828,3 +828,130 @@ if (
     );
 
 }
+
+
+/* =========================================================
+   HOME — CARROSSEL DE FOTOGRAFIAS
+   ========================================================= */
+
+const carrossel = document.querySelector("[data-carrossel]");
+
+if (carrossel) {
+    const slides = carrossel.querySelectorAll(".carrossel-slide");
+    const botaoAnteriorCarrossel = carrossel.querySelector(".carrossel-anterior");
+    const botaoProximoCarrossel = carrossel.querySelector(".carrossel-proximo");
+    const indicadores = carrossel.querySelectorAll(".carrossel-indicadores button");
+
+    let slideAtual = 0;
+    let intervaloCarrossel;
+
+    function mostrarSlide(index) {
+        slideAtual = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+            slide.classList.toggle("ativo", i === slideAtual);
+        });
+
+        indicadores.forEach((indicador, i) => {
+            const ativo = i === slideAtual;
+            indicador.classList.toggle("ativo", ativo);
+
+            if (ativo) {
+                indicador.setAttribute("aria-current", "true");
+            } else {
+                indicador.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    function proximoSlide() {
+        mostrarSlide(slideAtual + 1);
+    }
+
+    function iniciarCarrossel() {
+        clearInterval(intervaloCarrossel);
+        intervaloCarrossel = setInterval(proximoSlide, 5000);
+    }
+
+    botaoAnteriorCarrossel?.addEventListener("click", () => {
+        mostrarSlide(slideAtual - 1);
+        iniciarCarrossel();
+    });
+
+    botaoProximoCarrossel?.addEventListener("click", () => {
+        mostrarSlide(slideAtual + 1);
+        iniciarCarrossel();
+    });
+
+    indicadores.forEach((indicador, index) => {
+        indicador.addEventListener("click", () => {
+            mostrarSlide(index);
+            iniciarCarrossel();
+        });
+    });
+
+    carrossel.addEventListener("mouseenter", () => {
+        clearInterval(intervaloCarrossel);
+    });
+
+    carrossel.addEventListener("mouseleave", iniciarCarrossel);
+
+    mostrarSlide(0);
+    iniciarCarrossel();
+}
+
+
+/* =========================================================
+   SOBRE — LIGHTBOX DE VISUALIZAÇÃO
+   ========================================================= */
+
+const fotosSobre = document.querySelectorAll(".foto-sobre");
+const lightboxSobre = document.querySelector("#lightbox-sobre");
+const imagemLightboxSobre = lightboxSobre?.querySelector(".lightbox-imagem");
+const botaoFecharSobre = lightboxSobre?.querySelector(".lightbox-fechar");
+
+if (fotosSobre.length > 0 && lightboxSobre && imagemLightboxSobre && botaoFecharSobre) {
+    function abrirLightboxSobre(foto) {
+        const imagem = foto.querySelector("img");
+        const origem = foto.getAttribute("href");
+
+        imagemLightboxSobre.src = origem || imagem.src;
+        imagemLightboxSobre.alt = imagem.alt;
+
+        lightboxSobre.classList.add("aberto");
+        lightboxSobre.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+
+    function fecharLightboxSobre() {
+        lightboxSobre.classList.remove("aberto");
+        lightboxSobre.setAttribute("aria-hidden", "true");
+        imagemLightboxSobre.src = "";
+        document.body.style.overflow = "";
+    }
+
+    fotosSobre.forEach((foto) => {
+        foto.addEventListener("click", (event) => {
+            event.preventDefault();
+            abrirLightboxSobre(foto);
+        });
+    });
+
+    botaoFecharSobre.addEventListener("click", fecharLightboxSobre);
+
+    lightboxSobre.addEventListener("click", (event) => {
+        if (event.target === lightboxSobre) {
+            fecharLightboxSobre();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (!lightboxSobre.classList.contains("aberto")) {
+            return;
+        }
+
+        if (event.key === "Escape") {
+            fecharLightboxSobre();
+        }
+    });
+}
