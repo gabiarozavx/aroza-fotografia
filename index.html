@@ -75,10 +75,93 @@
 
 
     <!-- =========================
-         HERO
+         HERO — CARROSSEL
          ========================= -->
 
-    <section class="hero" id="inicio">
+    <section class="hero" id="inicio" data-hero-carrossel>
+
+        <div class="hero-slides">
+
+            <figure class="hero-slide ativo">
+                <img
+                    src="imagens/inicio/perfil.jpeg"
+                    alt="Fotografia de apresentação da Aroza Fotografia"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/perfil2.jpeg"
+                    alt="Retrato de Gabriel Molina"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto1.jpg"
+                    alt="Fotografia do IMS na Avenida Paulista"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto2.jpg"
+                    alt="Fotografia do Showcrazy no Centro Histórico"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto3.jpg"
+                    alt="Fotografia analógica do projeto Novo Análogo"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto4.jpg"
+                    alt="Fotografia analógica do projeto Novo Análogo"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto5.jpg"
+                    alt="Fotografia analógica do projeto Novo Análogo"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto6.jpg"
+                    alt="Fotografia analógica do projeto Novo Análogo"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto7.jpg"
+                    alt="Fotografia analógica do projeto Novo Análogo"
+                    loading="lazy"
+                >
+            </figure>
+
+            <figure class="hero-slide">
+                <img
+                    src="imagens/inicio/foto8.jpg"
+                    alt="Fotografia na Praça Ramos de Azevedo"
+                    loading="lazy"
+                >
+            </figure>
+
+        </div>
 
         <div class="hero-content">
 
@@ -90,6 +173,23 @@
                 Fotografia com foco na essência.
             </p>
 
+        </div>
+
+        <button class="hero-anterior" type="button" aria-label="Fotografia anterior">
+            &#10094;
+        </button>
+
+        <button class="hero-proximo" type="button" aria-label="Próxima fotografia">
+            &#10095;
+        </button>
+
+        <div class="hero-indicadores" aria-label="Selecionar fotografia">
+            <button class="ativo" type="button" aria-label="Fotografia 1" aria-current="true"></button>
+            <button type="button" aria-label="Fotografia 2"></button>
+            <button type="button" aria-label="Fotografia 3"></button>
+            <button type="button" aria-label="Fotografia 4"></button>
+            <button type="button" aria-label="Fotografia 5"></button>
+            <button type="button" aria-label="Fotografia 6"></button>
         </div>
 
     </section>

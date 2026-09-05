@@ -218,15 +218,6 @@ header .logo {
 .hero {
     height: 100vh;
 
-    background-image:
-        url("../imagens/inicio/perfil.jpeg");
-
-    background-repeat: no-repeat;
-
-    background-size: cover;
-
-    background-position: center center;
-
     display: flex;
 
     justify-content: center;
@@ -239,6 +230,164 @@ header .logo {
     position: relative;
 
     overflow: hidden;
+
+    background-color: #111;
+}
+
+
+/* Slides do carrossel do hero */
+
+.hero-slides {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+}
+
+.hero-slide {
+    position: absolute;
+
+    inset: 0;
+
+    margin: 0;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.hero-slide.ativo {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.hero-slide img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Setas do carrossel do hero */
+
+.hero-anterior,
+.hero-proximo {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 5;
+
+    width: 48px;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 1.3rem;
+
+    opacity: 0.8;
+
+    transition:
+        opacity 0.3s ease,
+        background 0.3s ease;
+}
+
+.hero-anterior:hover,
+.hero-proximo:hover {
+    opacity: 1;
+
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-anterior {
+    left: 30px;
+}
+
+.hero-proximo {
+    right: 30px;
+}
+
+
+/* Bolinhas — clicáveis e arrastáveis */
+
+.hero-indicadores {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 40px;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 6px;
+
+    cursor: grab;
+
+    touch-action: none;
+}
+
+.hero-indicadores.arrastando {
+    cursor: grabbing;
+}
+
+.hero-indicadores button {
+    width: 9px;
+
+    height: 9px;
+
+    padding: 0;
+
+    border: 1px solid #fff;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    opacity: 0.7;
+
+    transition:
+        opacity 0.3s ease,
+        background 0.3s ease,
+        transform 0.2s ease;
+}
+
+.hero-indicadores button.ativo {
+    background: #fff;
+
+    opacity: 1;
+
+    transform: scale(1.2);
 }
 
 
@@ -677,6 +826,21 @@ header .logo {
 
     padding:
         0 20px;
+
+    overflow-x:
+        auto;
+
+    -webkit-overflow-scrolling:
+        touch;
+
+    scrollbar-width:
+        none;
+}
+
+.acervo-filtros::-webkit-scrollbar {
+
+    display:
+        none;
 }
 
 .filtro {
@@ -2183,6 +2347,109 @@ footer {
     }
 
 
+    /* Menu vira lista dropdown — sem espaço pra
+       expandir na horizontal ao lado do ícone */
+
+    .menu-links {
+
+        position:
+            absolute;
+
+        top:
+            calc(100% + 16px);
+
+        right:
+            0;
+
+        max-width:
+            none;
+
+        width:
+            210px;
+
+        max-height:
+            0;
+
+        background:
+            #fff;
+
+        border:
+            1px solid #eee;
+
+        box-shadow:
+            0 14px 32px rgba(0, 0, 0, 0.14);
+
+        white-space:
+            normal;
+
+        transition:
+            max-height 0.4s ease;
+    }
+
+    .menu-links ul {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap:
+            4px;
+
+        padding:
+            16px 22px;
+    }
+
+    .menu-links ul li {
+
+        width:
+            100%;
+
+        transform:
+            translateY(10px);
+    }
+
+    .menu-links ul li a {
+
+        display:
+            block;
+
+        padding:
+            9px 0;
+    }
+
+    .cabecalho-menu.aberto .menu-links {
+
+        max-height:
+            320px;
+    }
+
+    .cabecalho-menu.aberto .menu-links ul li {
+
+        transform:
+            translateY(0);
+    }
+
+    /* Home (antes de rolar) e contato: o cabeçalho é
+       transparente com efeito difference — o dropdown
+       acompanha esse visual em vez de virar um cartão
+       branco sólido */
+
+    body.home header:not(.rolado) .menu-links,
+    body.contato-body header .menu-links {
+
+        background:
+            transparent;
+
+        border:
+            none;
+
+        box-shadow:
+            none;
+    }
+
+
     /* Hero */
 
     .hero-content h1 {
@@ -2459,6 +2726,31 @@ footer {
             0.8px;
     }
 
+    .hero-anterior,
+    .hero-proximo {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+        font-size:
+            1.05rem;
+    }
+
+    .hero-anterior {
+        left: 14px;
+    }
+
+    .hero-proximo {
+        right: 14px;
+    }
+
+    .hero-indicadores {
+        bottom: 26px;
+    }
+
 
     /* =====================================================
        ÚLTIMOS ENSAIOS MOBILE
@@ -2565,11 +2857,41 @@ footer {
 
     .acervo-filtros {
 
+        justify-content:
+            flex-start;
+
         gap:
             18px;
 
         margin-bottom:
             45px;
+
+        padding:
+            0 20px;
+
+        mask-image:
+            linear-gradient(
+                to right,
+                transparent,
+                #000 20px,
+                #000 calc(100% - 20px),
+                transparent
+            );
+
+        -webkit-mask-image:
+            linear-gradient(
+                to right,
+                transparent,
+                #000 20px,
+                #000 calc(100% - 20px),
+                transparent
+            );
+    }
+
+    .filtro {
+
+        flex-shrink:
+            0;
     }
 
     .acervo-item {
@@ -3034,12 +3356,6 @@ body.contato-body {
     background-attachment: fixed;
 }
 
-body.contato-body header {
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
 body.contato-body .pagina-contato {
     max-width: none;
     min-height: calc(100vh - 72px);
@@ -3048,32 +3364,146 @@ body.contato-body .pagina-contato {
     background: transparent;
 }
 
-body.contato-body .contato-introducao {
+body.contato-body .contato-introducao,
+body.contato-body .contato-categoria,
+body.contato-body .contato-introducao h1,
+body.contato-body .contato-introducao p,
+body.contato-body .campo-formulario label,
+body.contato-body .campo-formulario input,
+body.contato-body .campo-formulario textarea,
+body.contato-body .campo-formulario input::placeholder,
+body.contato-body .campo-formulario textarea::placeholder,
+body.contato-body .contato-enviar,
+body.contato-body .contato-status,
+body.contato-body .contato-direto-item span,
+body.contato-body .contato-direto-item a {
+    color: #fff;
+    text-shadow: none;
+}
+
+body.contato-body .campo-formulario input::placeholder,
+body.contato-body .campo-formulario textarea::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+body.contato-body .campo-formulario input,
+body.contato-body .campo-formulario textarea {
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+body.contato-body .campo-formulario input:focus,
+body.contato-body .campo-formulario textarea:focus {
+    border-bottom-color: #fff;
+}
+
+body.contato-body .contato-enviar {
+    border-color: #fff;
+}
+
+body.contato-body .contato-enviar:hover {
+    background: #fff;
     color: #222;
 }
 
-body.contato-body .contato-introducao h1,
-body.contato-body .contato-introducao p,
-body.contato-body .contato-categoria,
-body.contato-body .campo-formulario label,
-body.contato-body .contato-direto-item span,
-body.contato-body .contato-direto-item a,
-body.contato-body .contato-status {
-    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.85);
+body.contato-body .contato-direto {
+    border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+body.contato-body .contato-direto-item a {
+    border-bottom-color: transparent;
+}
+
+body.contato-body .contato-direto-item a:hover {
+    border-bottom-color: #fff;
 }
 
 body.contato-body .contato-conteudo {
-    padding: 45px 55px;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    padding: 0;
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 body.contato-body footer {
     margin-top: 0;
-    border-top-color: rgba(255, 255, 255, 0.55);
-    background: rgba(255, 255, 255, 0.60);
+    border-top-color: transparent;
+    background: transparent;
+}
+
+
+/* =========================================================
+   CABEÇALHO SOBRE FOTO — EFEITO DIFFERENCE
+   (home, enquanto está sobre o hero, e contato, sempre)
+
+   Importante: o mix-blend-mode precisa ir no PRÓPRIO
+   elemento que fica sobre a foto (header/footer), e não nos
+   filhos — como header já tem position + z-index, ele cria
+   seu próprio contexto de empilhamento, e um blend-mode
+   aplicado só nos filhos ficaria "preso" dentro desse
+   contexto, sem enxergar a foto por trás.
+   ========================================================= */
+
+body.home header,
+body.contato-body header {
+    background: transparent;
+    border-bottom-color: transparent;
+    mix-blend-mode: difference;
+    transition:
+        background 0.6s ease,
+        border-color 0.6s ease;
+}
+
+body.home header .logo,
+body.home header .pagina-atual,
+body.home header .menu-links ul li a,
+body.contato-body header .logo,
+body.contato-body header .pagina-atual,
+body.contato-body header .menu-links ul li a {
+    color: #fff;
+    transition: color 0.6s ease;
+}
+
+body.home header .menu-links ul li a.ativo,
+body.contato-body header .menu-links ul li a.ativo {
+    border-bottom-color: #fff;
+}
+
+body.home header .menu-toggle .ponto,
+body.contato-body header .menu-toggle .ponto {
+    background: #fff;
+    transition: background 0.6s ease;
+}
+
+body.contato-body footer {
+    mix-blend-mode: difference;
+}
+
+body.contato-body footer p {
+    color: #fff;
+}
+
+/* Home: assim que o scroll passa do hero, o cabeçalho
+   volta ao normal — fundo branco + conteúdo preto */
+
+body.home header.rolado {
+    background: #fff;
+    border-bottom-color: #ddd;
+    mix-blend-mode: normal;
+}
+
+body.home header.rolado .logo,
+body.home header.rolado .pagina-atual,
+body.home header.rolado .menu-links ul li a {
+    color: #333;
+}
+
+body.home header.rolado .menu-links ul li a.ativo {
+    border-bottom-color: #000;
+}
+
+body.home header.rolado .menu-toggle .ponto {
+    background: #222;
 }
 
 @media (max-width: 800px) {
@@ -3107,10 +3537,6 @@ body.contato-body footer {
     body.contato-body .pagina-contato {
         padding: 125px 20px 70px;
     }
-
-    body.contato-body .contato-conteudo {
-        padding: 30px 25px;
-    }
 }
 
 @media (max-width: 600px) {
@@ -3137,9 +3563,5 @@ body.contato-body footer {
     body.contato-body {
         background-position: center center;
         background-attachment: scroll;
-    }
-
-    body.contato-body .contato-conteudo {
-        padding: 25px 18px;
     }
 }

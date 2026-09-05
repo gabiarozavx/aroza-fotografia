@@ -1,4 +1,19 @@
 /* =========================================================
+   PÁGINA INICIAL — MARCAÇÃO
+   ========================================================= */
+
+if (
+    document.querySelector(".hero")
+) {
+
+    document.body.classList.add(
+        "home"
+    );
+
+}
+
+
+/* =========================================================
    HERO — MOVIMENTO E FADE
    ========================================================= */
 
@@ -53,14 +68,20 @@ window.addEventListener("scroll", () => {
         `translateY(${textMove}px)`;
 
 
-    /* Movimento da fotografia */
+    /* Cabeçalho — volta ao normal (fundo branco + texto
+       preto) assim que o scroll se aproxima do fim do hero */
 
-    const imageMove =
-        scrollY * 0.25;
+    const cabecalhoInicio =
+        document.querySelector("header");
 
+    if (cabecalhoInicio) {
 
-    hero.style.backgroundPosition =
-        `center calc(50% + ${imageMove}px)`;
+        cabecalhoInicio.classList.toggle(
+            "rolado",
+            progress > 0.75
+        );
+
+    }
 
 });
 
@@ -827,6 +848,122 @@ if (
         }
     );
 
+}
+
+
+/* =========================================================
+   HERO — CARROSSEL DE FOTOGRAFIAS
+   ========================================================= */
+
+const heroCarrossel = document.querySelector("[data-hero-carrossel]");
+
+if (heroCarrossel) {
+    const slidesHero = heroCarrossel.querySelectorAll(".hero-slide");
+    const botaoAnteriorHero = heroCarrossel.querySelector(".hero-anterior");
+    const botaoProximoHero = heroCarrossel.querySelector(".hero-proximo");
+    const indicadoresHeroContainer = heroCarrossel.querySelector(".hero-indicadores");
+    const indicadoresHero = indicadoresHeroContainer
+        ? indicadoresHeroContainer.querySelectorAll("button")
+        : [];
+
+    let slideHeroAtual = 0;
+    let intervaloHero;
+    let arrastandoHero = false;
+
+    function mostrarSlideHero(index) {
+        slideHeroAtual = (index + slidesHero.length) % slidesHero.length;
+
+        slidesHero.forEach((slide, i) => {
+            slide.classList.toggle("ativo", i === slideHeroAtual);
+        });
+
+        indicadoresHero.forEach((indicador, i) => {
+            const ativo = i === slideHeroAtual;
+            indicador.classList.toggle("ativo", ativo);
+
+            if (ativo) {
+                indicador.setAttribute("aria-current", "true");
+            } else {
+                indicador.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    function proximoSlideHero() {
+        mostrarSlideHero(slideHeroAtual + 1);
+    }
+
+    function iniciarCarrosselHero() {
+        clearInterval(intervaloHero);
+        intervaloHero = setInterval(proximoSlideHero, 5000);
+    }
+
+    botaoAnteriorHero?.addEventListener("click", () => {
+        mostrarSlideHero(slideHeroAtual - 1);
+        iniciarCarrosselHero();
+    });
+
+    botaoProximoHero?.addEventListener("click", () => {
+        mostrarSlideHero(slideHeroAtual + 1);
+        iniciarCarrosselHero();
+    });
+
+    /* Bolinhas — clicáveis e também arrastáveis (scrub) */
+
+    function indiceMaisProximoHero(clientX) {
+        let indice = 0;
+        let menorDistancia = Infinity;
+
+        indicadoresHero.forEach((indicador, i) => {
+            const rect = indicador.getBoundingClientRect();
+            const centro = rect.left + rect.width / 2;
+            const distancia = Math.abs(clientX - centro);
+
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                indice = i;
+            }
+        });
+
+        return indice;
+    }
+
+    if (indicadoresHeroContainer) {
+
+        indicadoresHeroContainer.addEventListener("pointerdown", (event) => {
+            arrastandoHero = true;
+            indicadoresHeroContainer.classList.add("arrastando");
+            indicadoresHeroContainer.setPointerCapture(event.pointerId);
+
+            mostrarSlideHero(indiceMaisProximoHero(event.clientX));
+            iniciarCarrosselHero();
+        });
+
+        indicadoresHeroContainer.addEventListener("pointermove", (event) => {
+            if (!arrastandoHero) {
+                return;
+            }
+
+            mostrarSlideHero(indiceMaisProximoHero(event.clientX));
+        });
+
+        const pararArrasteHero = () => {
+            arrastandoHero = false;
+            indicadoresHeroContainer.classList.remove("arrastando");
+        };
+
+        indicadoresHeroContainer.addEventListener("pointerup", pararArrasteHero);
+        indicadoresHeroContainer.addEventListener("pointercancel", pararArrasteHero);
+    }
+
+    heroCarrossel.addEventListener("mouseenter", () => {
+        clearInterval(intervaloHero);
+    });
+
+    heroCarrossel.addEventListener("mouseleave", iniciarCarrosselHero);
+
+    mostrarSlideHero(0);
+    iniciarCarrosselHero();
 }
 
 
