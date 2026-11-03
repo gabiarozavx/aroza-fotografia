@@ -2431,23 +2431,10 @@ footer {
             translateY(0);
     }
 
-    /* Home (antes de rolar) e contato: o cabeçalho é
-       transparente com efeito difference — o dropdown
-       acompanha esse visual em vez de virar um cartão
-       branco sólido */
-
-    body.home header:not(.rolado) .menu-links,
-    body.contato-body header .menu-links {
-
-        background:
-            transparent;
-
-        border:
-            none;
-
-        box-shadow:
-            none;
-    }
+    /* Home (antes de rolar) e contato: quando o menu abre, o
+       cabeçalho vira branco (regra mais abaixo, em "Menu aberto
+       sobre a foto"), então o dropdown segue o cartão branco
+       padrão — nada a sobrescrever aqui. */
 
 
     /* Hero */
@@ -3348,7 +3335,7 @@ footer {
 body.contato-body {
     min-height: 100vh;
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.30)),
+    
         url("../imagens/contato/fotobackground.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -3483,6 +3470,43 @@ body.contato-body footer p {
     color: #fff;
 }
 
+
+/* Menu aberto sobre a foto (home antes de rolar, e contato):
+   o efeito "difference" some enquanto a lista está aberta e o
+   cabeçalho vira branco, igual ao estado rolado — texto escuro
+   sobre fundo branco, sem interferência da fotografia.
+   Vale para qualquer tamanho de tela. Fechando o menu, tudo
+   volta ao efeito normal. */
+
+body.home header.menu-aberto:not(.rolado),
+body.contato-body header.menu-aberto {
+    background: #fff;
+    border-bottom-color: #ddd;
+    mix-blend-mode: normal;
+}
+
+body.home header.menu-aberto:not(.rolado) .logo,
+body.home header.menu-aberto:not(.rolado) .pagina-atual,
+body.contato-body header.menu-aberto .logo,
+body.contato-body header.menu-aberto .pagina-atual {
+    color: #333;
+}
+
+body.home header.menu-aberto:not(.rolado) .menu-toggle .ponto,
+body.contato-body header.menu-aberto .menu-toggle .ponto {
+    background: #222;
+}
+
+body.home header.menu-aberto:not(.rolado) .menu-links ul li a,
+body.contato-body header.menu-aberto .menu-links ul li a {
+    color: #333;
+}
+
+body.home header.menu-aberto:not(.rolado) .menu-links ul li a.ativo,
+body.contato-body header.menu-aberto .menu-links ul li a.ativo {
+    border-bottom-color: #000;
+}
+
 /* Home: assim que o scroll passa do hero, o cabeçalho
    volta ao normal — fundo branco + conteúdo preto */
 
@@ -3565,3 +3589,310 @@ body.home header.rolado .menu-toggle .ponto {
         background-attachment: scroll;
     }
 }
+
+/* =========================================================
+   HERO — FRASES ROTATIVAS
+   O texto muda independentemente das fotografias.
+   ========================================================= */
+
+.hero-frase {
+    opacity: 1;
+    transition: opacity 0.45s ease;
+}
+
+.hero-frase.trocando {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   ACERVO — PROJETOS
+   Projetos autorais/estudos ficam separados dos ensaios.
+   ========================================================= */
+
+.acervo-projetos {
+    max-width: 1200px;
+    margin: 0 auto 70px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.acervo-projetos-cabecalho span {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #777;
+}
+
+.acervo-projetos-cabecalho h2 {
+    margin-top: 12px;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #222;
+}
+
+.acervo-projeto-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 35px;
+    padding: 30px 0;
+    border-bottom: 1px solid #eee;
+    color: inherit;
+    text-decoration: none;
+    transition: padding 0.35s ease;
+}
+
+.acervo-projeto-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.acervo-projeto-texto {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.acervo-projeto-numero {
+    flex: 0 0 auto;
+    padding-top: 5px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #999;
+}
+
+.acervo-projeto-item h3 {
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: #222;
+}
+
+.acervo-projeto-item p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: #777;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.acervo-projeto-seta {
+    flex: 0 0 auto;
+    font-size: 1.5rem;
+    color: #777;
+    transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.acervo-projeto-item:hover .acervo-projeto-seta {
+    transform: translateX(6px);
+    color: #222;
+}
+
+
+/* Carrossel — troca de projeto a cada 7,5s (ver script.js).
+   Com um único projeto cadastrado, o JS esconde os
+   indicadores e a troca automática nem chega a rodar; ao
+   adicionar novos itens em .acervo-projetos-trilha, o
+   carrossel passa a girar entre eles sozinho. */
+
+.acervo-projetos-carrossel {
+    overflow: hidden;
+}
+
+.acervo-projetos-trilha {
+    display: flex;
+    transition: transform 0.6s ease;
+}
+
+.acervo-projetos-trilha .acervo-projeto-item {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-top: 0;
+}
+
+.acervo-projetos-indicadores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.acervo-projetos-indicadores button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 1px solid #999;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0.6;
+    transition:
+        opacity 0.3s ease,
+        background 0.3s ease,
+        transform 0.2s ease;
+}
+
+.acervo-projetos-indicadores button.ativo {
+    background: #222;
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+
+/* =========================================================
+   PROCESSOS FOTOGRÁFICOS
+   ========================================================= */
+
+.pagina-processos {
+    max-width: 1200px;
+    min-height: calc(100vh - 140px);
+    margin: 0 auto;
+    padding: 170px 40px 100px;
+    display: flex;
+    align-items: center;
+}
+
+.processos-introducao {
+    max-width: 760px;
+}
+
+.processos-categoria {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #777;
+}
+
+.processos-introducao h1 {
+    margin-top: 15px;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #222;
+}
+
+.processos-introducao > p {
+    max-width: 680px;
+    margin-top: 22px;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.processos-aviso {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.processos-aviso span {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #777;
+}
+
+.processos-aviso p {
+    margin-top: 10px;
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   TRANSIÇÃO ENTRE PÁGINAS
+   ========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.42s ease;
+}
+
+body.saindo::before {
+    opacity: 1;
+}
+
+@keyframes entrada-pagina {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: entrada-pagina 0.45s ease both;
+}
+
+
+@media (max-width: 800px) {
+    .acervo-projetos {
+        margin-bottom: 50px;
+        padding-bottom: 35px;
+    }
+
+    .acervo-projetos-cabecalho h2 {
+        font-size: 1.7rem;
+    }
+
+    .acervo-projeto-item {
+        gap: 20px;
+    }
+
+    .acervo-projeto-texto {
+        gap: 20px;
+    }
+
+    .pagina-processos {
+        min-height: auto;
+        padding: 130px 25px 80px;
+    }
+
+    .processos-introducao h1 {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .acervo-projeto-item {
+        align-items: flex-start;
+    }
+
+    .acervo-projeto-texto {
+        gap: 14px;
+    }
+
+    .acervo-projeto-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .acervo-projeto-item p {
+        font-size: 0.85rem;
+    }
+
+    .acervo-projeto-seta {
+        font-size: 1.2rem;
+    }
+
+    .processos-introducao h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body,
+    .hero-frase,
+    body::before {
+        animation: none;
+        transition: none;
+    }
+}
+

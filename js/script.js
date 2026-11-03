@@ -14,76 +14,64 @@ if (
 
 
 /* =========================================================
-   HERO — MOVIMENTO E FADE
+   HERO — MOVIMENTO, FADE E CABEÇALHO
    ========================================================= */
 
-window.addEventListener("scroll", () => {
+const heroInicial = document.querySelector(".hero");
+const heroConteudoInicial = document.querySelector(".hero-content");
+const cabecalhoInicial = document.querySelector("header");
 
-    const hero =
-        document.querySelector(".hero");
+if (heroInicial && heroConteudoInicial && cabecalhoInicial) {
+    let atualizacaoHeroAgendada = false;
 
-    const heroContent =
-        document.querySelector(".hero-content");
+    function atualizarHeroNoScroll() {
+        atualizacaoHeroAgendada = false;
 
+        const scrollY = window.scrollY;
+        const heroHeight = heroInicial.offsetHeight;
+        const limiteCabecalho = Math.max(
+            heroHeight - cabecalhoInicial.offsetHeight,
+            0
+        );
 
-    if (!hero || !heroContent) {
-        return;
-    }
-
-
-    const scrollY =
-        window.scrollY;
-
-    const heroHeight =
-        hero.offsetHeight;
-
-
-    const progress =
-        Math.min(
+        const progress = Math.min(
             scrollY / heroHeight,
             1
         );
 
-
-    /* Fade do texto */
-
-    const opacity =
-        Math.max(
+        const opacity = Math.max(
             1 - progress * 1.5,
             0
         );
 
+        const textMove = scrollY * -0.25;
 
-    /* Movimento do texto */
+        heroConteudoInicial.style.opacity = opacity;
+        heroConteudoInicial.style.transform = `translateY(${textMove}px)`;
 
-    const textMove =
-        scrollY * -0.25;
-
-
-    heroContent.style.opacity =
-        opacity;
-
-
-    heroContent.style.transform =
-        `translateY(${textMove}px)`;
-
-
-    /* Cabeçalho — volta ao normal (fundo branco + texto
-       preto) assim que o scroll se aproxima do fim do hero */
-
-    const cabecalhoInicio =
-        document.querySelector("header");
-
-    if (cabecalhoInicio) {
-
-        cabecalhoInicio.classList.toggle(
+        cabecalhoInicial.classList.toggle(
             "rolado",
-            progress > 0.75
+            scrollY >= limiteCabecalho
         );
-
     }
 
-});
+    function solicitarAtualizacaoHero() {
+        if (atualizacaoHeroAgendada) {
+            return;
+        }
+
+        atualizacaoHeroAgendada = true;
+        window.requestAnimationFrame(atualizarHeroNoScroll);
+    }
+
+    window.addEventListener(
+        "scroll",
+        solicitarAtualizacaoHero,
+        { passive: true }
+    );
+
+    atualizarHeroNoScroll();
+}
 
 
 /* =========================================================
@@ -107,10 +95,24 @@ if (
 ) {
 
 
+    /* Cabeçalho que contém o menu — recebe uma classe própria
+       quando a lista abre, usada no CSS pra tirar o efeito
+       "difference" e deixar o texto legível sobre a foto. */
+
+    const cabecalhoDoMenu =
+        cabecalhoMenu.closest(
+            "header"
+        );
+
+
     function abrirMenu() {
 
         cabecalhoMenu.classList.add(
             "aberto"
+        );
+
+        cabecalhoDoMenu?.classList.add(
+            "menu-aberto"
         );
 
 
@@ -126,6 +128,10 @@ if (
 
         cabecalhoMenu.classList.remove(
             "aberto"
+        );
+
+        cabecalhoDoMenu?.classList.remove(
+            "menu-aberto"
         );
 
 
@@ -198,6 +204,44 @@ if (
             }
 
         }
+    );
+
+
+    /* Fecha ao rolar a tela — o cabeçalho volta ao efeito normal.
+       Guarda a posição em que o menu foi aberto e só fecha se a
+       rolagem for de verdade (alguns pixels), pra não fechar por
+       oscilações mínimas, como a barra do navegador no celular. */
+
+    let scrollAoAbrirMenu = 0;
+
+    menuToggle.addEventListener(
+        "click",
+        () => {
+
+            scrollAoAbrirMenu = window.scrollY;
+
+        }
+    );
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (
+                cabecalhoMenu.classList.contains(
+                    "aberto"
+                ) &&
+                Math.abs(
+                    window.scrollY - scrollAoAbrirMenu
+                ) > 10
+            ) {
+
+                fecharMenu();
+
+            }
+
+        },
+        { passive: true }
     );
 
 }
@@ -956,14 +1000,69 @@ if (heroCarrossel) {
         indicadoresHeroContainer.addEventListener("pointercancel", pararArrasteHero);
     }
 
-    heroCarrossel.addEventListener("mouseenter", () => {
-        clearInterval(intervaloHero);
-    });
+    document.addEventListener("keydown", (event) => {
+        if (
+            document.activeElement?.matches(
+                "input, textarea, select, button, a"
+            )
+        ) {
+            return;
+        }
 
-    heroCarrossel.addEventListener("mouseleave", iniciarCarrosselHero);
+        if (event.key === "ArrowLeft") {
+            mostrarSlideHero(slideHeroAtual - 1);
+            iniciarCarrosselHero();
+        } else if (event.key === "ArrowRight") {
+            mostrarSlideHero(slideHeroAtual + 1);
+            iniciarCarrosselHero();
+        }
+    });
 
     mostrarSlideHero(0);
     iniciarCarrosselHero();
+}
+
+
+/* =========================================================
+   HOME — CARROSSEL DE FRASES
+   Independente do carrossel de fotografias.
+   ========================================================= */
+
+const heroFrase = document.querySelector(".hero-frase");
+
+if (heroFrase) {
+    const frasesHero = [
+        "Fotografia com foco na essência.",
+        "O que permanece depois do instante.",
+        "Entre presença, silêncio e movimento.",
+        "Fotografar também é escolher o que fica.",
+        "Toda imagem guarda alguma coisa."
+    ];
+
+    let indiceFraseHero = 0;
+    let intervaloFraseHero;
+    const movimentoReduzido = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    function trocarFraseHero() {
+        heroFrase.classList.add("trocando");
+
+        window.setTimeout(() => {
+            indiceFraseHero =
+                (indiceFraseHero + 1) % frasesHero.length;
+
+            heroFrase.textContent = frasesHero[indiceFraseHero];
+            heroFrase.classList.remove("trocando");
+        }, movimentoReduzido ? 0 : 450);
+    }
+
+    if (!movimentoReduzido) {
+        intervaloFraseHero = window.setInterval(
+            trocarFraseHero,
+            5000
+        );
+    }
 }
 
 
@@ -1027,14 +1126,75 @@ if (carrossel) {
         });
     });
 
-    carrossel.addEventListener("mouseenter", () => {
-        clearInterval(intervaloCarrossel);
-    });
-
-    carrossel.addEventListener("mouseleave", iniciarCarrossel);
-
     mostrarSlide(0);
     iniciarCarrossel();
+}
+
+
+/* =========================================================
+   ACERVO — CARROSSEL DE PROJETOS
+   Troca automaticamente a cada 7,5s. Com um único projeto
+   cadastrado, os indicadores ficam ocultos e a troca nem
+   chega a rodar — ao adicionar mais itens em
+   .acervo-projetos-trilha, o carrossel passa a girar sozinho.
+   ========================================================= */
+
+const carrosselProjetos = document.querySelector("[data-carrossel-projetos]");
+
+if (carrosselProjetos) {
+    const trilhaProjetos = carrosselProjetos.querySelector(".acervo-projetos-trilha");
+    const itensProjetos = carrosselProjetos.querySelectorAll(".acervo-projeto-item");
+    const indicadoresContainerProjetos = carrosselProjetos.querySelector(".acervo-projetos-indicadores");
+    const indicadoresProjetos = carrosselProjetos.querySelectorAll(".acervo-projetos-indicadores button");
+
+    let projetoAtual = 0;
+    let intervaloProjetos;
+
+    function mostrarProjeto(index) {
+        projetoAtual = (index + itensProjetos.length) % itensProjetos.length;
+
+        if (trilhaProjetos) {
+            trilhaProjetos.style.transform = `translateX(-${projetoAtual * 100}%)`;
+        }
+
+        indicadoresProjetos.forEach((indicador, i) => {
+            const ativo = i === projetoAtual;
+            indicador.classList.toggle("ativo", ativo);
+
+            if (ativo) {
+                indicador.setAttribute("aria-current", "true");
+            } else {
+                indicador.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    function proximoProjeto() {
+        mostrarProjeto(projetoAtual + 1);
+    }
+
+    function iniciarCarrosselProjetos() {
+        clearInterval(intervaloProjetos);
+        intervaloProjetos = setInterval(proximoProjeto, 7500);
+    }
+
+    if (itensProjetos.length > 1) {
+
+        indicadoresProjetos.forEach((indicador, index) => {
+            indicador.addEventListener("click", () => {
+                mostrarProjeto(index);
+                iniciarCarrosselProjetos();
+            });
+        });
+
+        mostrarProjeto(0);
+        iniciarCarrosselProjetos();
+
+    } else if (indicadoresContainerProjetos) {
+
+        indicadoresContainerProjetos.style.display = "none";
+
+    }
 }
 
 
@@ -1090,5 +1250,62 @@ if (fotosSobre.length > 0 && lightboxSobre && imagemLightboxSobre && botaoFechar
         if (event.key === "Escape") {
             fecharLightboxSobre();
         }
+    });
+}
+
+
+/* =========================================================
+   TRANSIÇÃO ENTRE PÁGINAS
+   Mantém a navegação normal do site e só intercepta links
+   internos comuns para permitir o fade para preto.
+   ========================================================= */
+
+const movimentoReduzidoPagina = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+if (!movimentoReduzidoPagina) {
+    window.addEventListener("pageshow", () => {
+        document.body.classList.remove("saindo");
+    });
+
+    document.addEventListener("click", (event) => {
+        const link = event.target.closest("a");
+
+        if (!link) {
+            return;
+        }
+
+        if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            link.target === "_blank" ||
+            link.hasAttribute("download")
+        ) {
+            return;
+        }
+
+        const destino = new URL(link.href, window.location.href);
+
+        if (
+            destino.origin !== window.location.origin ||
+            (
+                destino.pathname === window.location.pathname &&
+                destino.search === window.location.search
+            )
+        ) {
+            return;
+        }
+
+        event.preventDefault();
+        document.body.classList.add("saindo");
+
+        window.setTimeout(() => {
+            window.location.href = destino.href;
+        }, 420);
     });
 }
