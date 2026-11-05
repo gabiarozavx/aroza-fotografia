@@ -727,6 +727,34 @@ if (
 
 }
 
+/* =========================================================
+    ORDENAÇÃO DE ENSAIOS - ACERVO
+    ========================================================= */
+
+const listaAcervo = document.querySelector(".acervo-lista");
+
+if (listaAcervo) {
+
+    const itens = Array.from(
+        listaAcervo.querySelectorAll(".acervo-item")
+    );
+
+    itens.sort((a, b) => {
+        return Number(a.dataset.ordem) - Number(b.dataset.ordem);
+    });
+
+    itens.forEach((item, index) => {
+
+        listaAcervo.appendChild(item);
+
+        const numero = item.querySelector(".acervo-numero");
+
+        if (numero) {
+            numero.textContent = String(index + 1).padStart(2, "0")
+        }
+    });
+
+}
 
 /* =========================================================
    FILTRO DO ACERVO
